@@ -1,2 +1,2 @@
-enabled_plugins:
+enabled_external_auth_plugins:
   zoho: true
