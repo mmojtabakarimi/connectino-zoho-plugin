@@ -1,15 +1,14 @@
 paths:
-  /users/{user_uuid}/external/mobile:
+  /zoho/{user_uuid}/external/mobile:
     get:
       consumes:
         - application/json
       produces:
         - application/json
-      summary: Get your Mobile token
+      summary: !!Get your ZOHO token!!
       description: "**Required ACL**: `auth.users.{user_uuid}.external.mobile.read`"
       tags:
-        - users
-        - mobile
+        - zoho
       parameters:
         - $ref: '#/parameters/user_uuid'
       responses:
@@ -27,8 +26,7 @@ paths:
       summary: Add push mobile token device
       description: "**Required ACL**: `auth.users.{user_uuid}.external.mobile.create`"
       tags:
-        - users
-        - mobile
+        - zoho
       parameters:
         - $ref: '#/parameters/user_uuid'
         - name: body
