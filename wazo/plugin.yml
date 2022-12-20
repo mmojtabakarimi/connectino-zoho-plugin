@@ -1,0 +1,7 @@
+name: wazo-auth-zoho
+namespace: connectino
+version: 1.0.0
+author: Mojtaba Karimi
+display_name: Connectino Zoho
+description: This plugin install Zoho
+homepage: https://github.com/mmojtabakarimi/connectinio-zoho-plugin.git

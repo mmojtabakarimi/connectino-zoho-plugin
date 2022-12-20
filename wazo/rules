@@ -1,0 +1,36 @@
+#!/bin/sh
+
+case "$1" in
+build)
+    python3 setup.py bdist -d dist/python3
+    ;;
+
+package)
+    tar xvf dist/python3/wazo-zoho-*.tar.gz -C ${pkgdir}
+    cp -R etc ${pkgdir}/
+
+
+    ;;
+
+install)
+    echo "--------------Start to copy files"
+    echo "---------- Finish copy files"
+    systemctl restart wazo-auth
+
+    ;;
+
+uninstall)
+    echo "--------------Start to remove files"
+    echo "---------- Finish remove files"
+
+    systemctl restart wazo-auth
+
+    ;;
+
+postrm) ;;
+
+    *)
+    echo "$0 called with unknown argument '$1'" >&2
+    exit 1
+    ;;
+esac

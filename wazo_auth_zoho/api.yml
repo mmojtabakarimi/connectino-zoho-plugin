@@ -1,0 +1,200 @@
+paths:
+  /ratings:
+    get:
+      summary: List All Ratings
+      description: '**Required ACL:** `confd.zoho.read`'
+      tags:
+        - ratings
+      parameters:
+        - $ref: '#/parameters/tenantuuid'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/RatingItems'
+    post:
+      summary: Add Rating
+      description: '**Required ACL:** `confd.rating.create`'
+      tags:
+        - ratings
+      parameters:
+        - $ref: '#/parameters/tenantuuid'
+        - name: body
+          in: body
+          description: Raing to create
+          required: true
+          schema:
+            $ref: '#/components/schemas/RatingList' 
+      responses:
+        '201':
+          description: Rating created
+          schema:
+            $ref: '#/definitions/RatingItems'                
+        '400':
+          $ref: '#/responses/CreateError'
+  /ratings/{rating-id}:   
+    get:
+      summary: Get Rating by id
+      description: '**Required ACL:** `confd.rating.create`'
+      tags:
+        - ratings
+      parameters:
+        - $ref: '#/parameters/tenantuuid'
+        - $ref: '#/parameters/rating-id'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/RatingItems'    
+    put:
+      summary: Edit Rating by id
+      description: '**Required ACL:** `confd.rating.create`'
+      tags:
+        - ratings
+      parameters:
+        - $ref: '#/parameters/tenantuuid'
+        - name: body
+          in: body
+          description: Raing to edit
+          required: true
+          schema:
+            $ref: '#/components/schemas/RatingList' 
+      responses:
+        '201':
+          description: Rating created
+          schema:
+            $ref: '#/definitions/RatingItems'                
+        '400':
+          $ref: '#/responses/CreateError'
+    delete:
+      summary: Delete Rating by id
+      description: '**Required ACL:** `confd.rating.create`'
+      tags:
+        - ratings
+      parameters:
+        - $ref: '#/parameters/tenantuuid'
+        - $ref: '#/parameters/rating-id'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/RatingItems'
+
+
+  /billing/aparty/{aparty_number}:
+    get:
+      summary: List zoho bulk for aparty_number
+      description: '**Required ACL:** `confd.zoho.read`'
+      tags:
+        - zoho
+      parameters:
+        - $ref: '#/parameters/tenantuuid'
+        - $ref: '#/parameters/aparty_number'
+        - name: start
+          in: query
+          description: Start Search Date
+          required: true
+          explode: true
+          schema:
+            type: string
+        - name: end
+          in: query
+          description: End search Date
+          required: true
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/BulkItems'
+
+components:
+  schemas:
+    RatingList:
+      type: object
+      properties:
+        trunk_provider_name:
+          type: string
+          example: "trunk"
+        local:
+          type: string
+          example: 1
+        national:
+          type: string
+          example: 1
+        mobile:
+          type: string
+          example: 1
+        international:
+          type: string
+          example: 1
+        currency:
+          type: string
+          example: "RLS"
+        free:
+          type: 
+          example: 0          
+      xml:
+        name: RatingList
+
+definitions:
+  RatingItems:
+    title: RatingItems
+    allOf:
+      - properties:
+          tenant_uuid:
+            type: string
+            readOnly: true
+            description: The tenant UUId
+          trunk_provider_name:
+            type: string
+            readOnly: true
+            description: The trunk provider name
+          local:
+            type: string
+            readOnly: true
+            description: The local  rate
+          national:
+            type: string
+            readOnly: true
+            description: The national rate
+          mobile:
+            type: string
+            readOnly: true
+            description: The mobile rate
+          international:
+            type: string
+            readOnly: true
+            description: Teh international rate
+          currecncy:
+            type: string
+            readOnly: true
+            description: The Currency unit
+          free:
+            type: string
+            readOnly: true
+            description: The Free Flag
+
+parameters:
+  tenantuuid:
+    name: Wazo-Tenant
+    type: string
+    in: header
+    description: "The tenant's UUID, defining the ownership of a given resource."
+    required: false
+  aparty_number:
+    required: true
+    type: integer
+    name: aparty_number
+    in: path
+    description: Aparty Number
