@@ -6,7 +6,7 @@ build)
     ;;
 
 package)
-    tar xvf dist/python3/wazo-zoho-*.tar.gz -C ${pkgdir}
+    tar xvf dist/python3/wazo_zoho-*.tar.gz -C ${pkgdir}
     cp -R etc ${pkgdir}/
 
 
