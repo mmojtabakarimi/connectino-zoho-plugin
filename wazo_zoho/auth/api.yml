@@ -1,5 +1,5 @@
 paths:
-  /zoho/{user_uuid}/external/mobile:
+  /zoho:
     get:
       consumes:
         - application/json
