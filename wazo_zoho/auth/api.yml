@@ -5,7 +5,7 @@ paths:
         - application/json
       produces:
         - application/json
-      summary: !!Get your ZOHO token!!
+      summary: MOJIMOJI
       description: "**Required ACL**: `auth.users.{user_uuid}.external.mobile.read`"
       tags:
         - zoho
